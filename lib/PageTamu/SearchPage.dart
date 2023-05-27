@@ -10,6 +10,10 @@ class SearchPage extends StatefulWidget {
 class _SearchPageState extends State<SearchPage> {
   List<Guru> searchResults = []; // Daftar hasil pencarian
 
+  // Variabel untuk menampilkan/hide drawer
+  GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey<ScaffoldState>();
+  bool _isDrawerOpen = false;
+
   void searchGuru(String keyword) {
     // Fungsi untuk melakukan pencarian guru
     setState(() {
@@ -28,6 +32,7 @@ class _SearchPageState extends State<SearchPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      key: _scaffoldKey, // Menyimpan kunci scaffold
       appBar: AppBar(
         backgroundColor: Colors.lightBlue,
         leading: GestureDetector(
@@ -48,12 +53,6 @@ class _SearchPageState extends State<SearchPage> {
             ),
           ),
         ),
-        // leading: IconButton(
-        //   icon: Icon(Icons.cancel),
-        //   onPressed: () {
-        //     Navigator.pop(context);
-        //   },
-        // ),
         title: TextField(
           decoration: InputDecoration(
             hintText: 'Cari guru...',
@@ -64,11 +63,12 @@ class _SearchPageState extends State<SearchPage> {
           IconButton(
             icon: Icon(Icons.filter_list),
             onPressed: () {
-              // Aksi ketika tombol filter ditekan
+              _handleDrawer(); // Memanggil fungsi untuk menampilkan/hide drawer
             },
           ),
         ],
       ),
+      drawer: _buildDrawer(), // Memanggil fungsi untuk membangun drawer
       body: Padding(
         padding: EdgeInsets.all(16.0),
         child: GridView.builder(
@@ -151,5 +151,130 @@ class _SearchPageState extends State<SearchPage> {
         );
       },
     );
+  }
+
+  // Fungsi untuk menampilkan/hide drawer
+  void _handleDrawer() {
+    setState(() {
+      _isDrawerOpen = !_isDrawerOpen;
+      if (_isDrawerOpen) {
+        _scaffoldKey.currentState?.openEndDrawer();
+      } else {
+        _scaffoldKey.currentState?.openDrawer();
+      }
+    });
+  }
+
+  // Fungsi untuk membangun drawer
+  Widget _buildDrawer() {
+    return Drawer(
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.stretch,
+        children: [
+          Container(
+            height: 100,
+            color: Colors.lightBlue,
+            child: Padding(
+              padding: EdgeInsets.symmetric(horizontal: 16, vertical: 32),
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  Text(
+                    'Pilih Mata Pelajaran',
+                    style: TextStyle(
+                      color: Colors.white,
+                      fontSize: 20,
+                      fontWeight: FontWeight.bold,
+                    ),
+                  ),
+                ],
+              ),
+            ),
+          ),
+          Expanded(
+            child: ListView(
+              children: [
+                ListTile(
+                  title: Text('Matpel 1'),
+                  onTap: () {
+                    _filterGuruByMatpel('Matpel 1');
+                  },
+                ),
+                ListTile(
+                  title: Text('Matpel 2'),
+                  onTap: () {
+                    _filterGuruByMatpel('Matpel 2');
+                  },
+                ),
+                ListTile(
+                  title: Text('Matpel 3'),
+                  onTap: () {
+                    _filterGuruByMatpel('Matpel 3');
+                  },
+                ),
+                ListTile(
+                  title: Text('Matpel 4'),
+                  onTap: () {
+                    _filterGuruByMatpel('Matpel 4');
+                  },
+                ),
+                ListTile(
+                  title: Text('Matpel 5'),
+                  onTap: () {
+                    _filterGuruByMatpel('Matpel 5');
+                  },
+                ),
+                ListTile(
+                  title: Text('Matpel 6'),
+                  onTap: () {
+                    _filterGuruByMatpel('Matpel 6');
+                  },
+                ),
+                ListTile(
+                  title: Text('Matpel 7'),
+                  onTap: () {
+                    _filterGuruByMatpel('Matpel 7');
+                  },
+                ),
+                ListTile(
+                  title: Text('Matpel 8'),
+                  onTap: () {
+                    _filterGuruByMatpel('Matpel 8');
+                  },
+                ),
+                ListTile(
+                  title: Text('Matpel 9'),
+                  onTap: () {
+                    _filterGuruByMatpel('Matpel 9');
+                  },
+                ),
+                ListTile(
+                  title: Text('Matpel 10'),
+                  onTap: () {
+                    _filterGuruByMatpel('Matpel 10');
+                  },
+                ),
+                // Tambahkan fungsi matpel lainnya sesuai kebutuhan
+              ],
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+
+  // Fungsi untuk memfilter data guru berdasarkan mata pelajaran
+  void _filterGuruByMatpel(String matpel) {
+    setState(() {
+      searchResults.clear();
+
+      for (Guru guru in guruList) {
+        if (guru.matpel.toLowerCase() == matpel.toLowerCase()) {
+          searchResults.add(guru);
+        }
+      }
+    });
+
+    _handleDrawer(); // Menutup drawer setelah memfilter data
   }
 }
