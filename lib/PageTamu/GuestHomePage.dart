@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'main.dart';
 import 'SearchPage.dart';
+import '../main.dart';
 
 class GuestHomePage extends StatelessWidget {
   @override

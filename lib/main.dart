@@ -1,7 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/scheduler.dart';
-import 'GuestHomePage.dart';
-import 'HomePage.dart';
+import 'PageTamu/HomePage.dart';
 
 void main() {
   runApp(UniruApp());

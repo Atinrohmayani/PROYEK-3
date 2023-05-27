@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:uniru_app/HomePage.dart';
-import 'main.dart';
+import '../main.dart';
 import 'GuestHomePage.dart';
 
 class SearchPage extends StatefulWidget {
