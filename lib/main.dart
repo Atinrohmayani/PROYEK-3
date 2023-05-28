@@ -41,3 +41,17 @@ final List<Guru> guruList = [
   Guru('Guru 9', 'Matpel 9', 'assets/guru9.png', 'deskripsi guru...'),
   Guru('Guru 10', 'Matpel 10', 'assets/guru10.png', 'deskripsi guru...'),
 ];
+
+final List<String> kategori = [
+  'Kategori 1',
+  'Kategori 2',
+  'Kategori 3',
+  'Kategori 4',
+  'Kategori 5',
+  'Kategori 6',
+  'Kategori 7',
+  'Kategori 8',
+  'Kategori 9',
+  'Kategori 10',
+  // Tambahkan mata pelajaran lainnya jika diperlukan
+];
